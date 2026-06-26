@@ -1,147 +1,189 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRASTES | Instrumentos de Autor</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trastes — Luthería a Medida</title>
+
+  <!-- Cormorant Garamond ≈ IvyOra Display · Inter ≈ TT Commons Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-    <section class="hero-section" id="hero">
-        <header class="hero-header">
-            <div class="logo">trastes</div>
-        </header>
-        <div class="hero-content">
-            <h1 class="hero-title">Donde la madera<br>encuentra su voz</h1>
-            <div class="hero-cta">
-                <a href="#custom" class="btn btn-solid">VER TU INSTRUMENTO</a>
-                <a href="#taller" class="btn btn-outline">EMPIEZA ACÁ</a>
-            </div>
+  <!-- ═══════════════════════════════════
+       §1 · HERO
+  ════════════════════════════════════ -->
+  <section class="hero" id="inicio">
+
+    <!-- Fondo: gradiente oscuro + foto guitarra
+         → Reemplazá la URL por tu propia foto -->
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <header class="hero__header">
+      <a class="logo" href="#inicio">trastes</a>
+    </header>
+
+    <div class="hero__content">
+      <h1 class="hero__title anim-fade-up">
+        Donde la madera<br>encuentra su voz
+      </h1>
+      <div class="hero__ctas anim-fade-up anim-delay">
+        <a href="#maderas" class="btn btn--solid">Ver tu instrumento</a>
+        <a href="#proceso" class="btn btn--outline">Empieza acá</a>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       §2 · DECLARACIÓN DE PRINCIPIOS
+  ════════════════════════════════════ -->
+  <section class="principios" id="principios">
+    <div class="principios__rings" aria-hidden="true"></div>
+    <div class="principios__inner">
+      <p class="principios__quote js-word-reveal">
+        Cada instrumento nace de un proceso artesanal donde
+        <strong>materiales</strong>, calibración y detalle definen un
+        sonido imposible de replicar.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       §3 · EL TALLER
+  ════════════════════════════════════ -->
+  <section class="taller" id="taller">
+    <h2 class="taller__title anim-fade-reveal">Un espacio<br>para vos</h2>
+    <div class="taller__frame">
+      <!-- Reemplazá con foto de tu taller -->
+      <img
+        class="taller__img js-parallax"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=85"
+        alt="Taller de luthería iluminado por luz natural"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       §4 · MADERAS
+  ════════════════════════════════════ -->
+  <section class="maderas" id="maderas">
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <!-- 8 spans: primeras 4 reales, últimas 4 son el duplicado para el loop -->
+        <span>maderas</span><span>maderas</span><span>maderas</span><span>maderas</span>
+        <span>maderas</span><span>maderas</span><span>maderas</span><span>maderas</span>
+      </div>
+    </div>
+
+    <div class="maderas__body">
+      <div class="maderas__cards" id="maderasCards">
+
+        <article class="wood-card" data-index="0">
+          <span class="wood-card__num">01</span>
+          <!-- Podés reemplazar .wood-X con background-image: url('...') -->
+          <div class="wood-card__img wood-cedro"></div>
+          <span class="wood-card__name">Cedro</span>
+        </article>
+
+        <article class="wood-card" data-index="1">
+          <span class="wood-card__num">02</span>
+          <div class="wood-card__img wood-picea"></div>
+          <span class="wood-card__name">Picea</span>
+        </article>
+
+        <article class="wood-card" data-index="2">
+          <span class="wood-card__num">03</span>
+          <div class="wood-card__img wood-caoba"></div>
+          <span class="wood-card__name">Caoba</span>
+        </article>
+
+        <article class="wood-card" data-index="3">
+          <span class="wood-card__num">04</span>
+          <div class="wood-card__img wood-palisandro"></div>
+          <span class="wood-card__name">Palisandro</span>
+        </article>
+
+      </div>
+
+      <aside class="maderas__desc">
+        <p id="maderaDesc">
+          Seleccioná una madera para descubrir qué sonido evoca.
+        </p>
+      </aside>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════
+       §5 · EL PROCESO
+  ════════════════════════════════════ -->
+  <section class="proceso" id="proceso">
+
+    <p class="proceso__eyebrow anim-fade-reveal">Instrumento a medida</p>
+
+    <div class="proceso__steps">
+
+      <div class="proceso__row anim-slide-left">
+        <div class="proceso__step">
+          <span class="proceso__n">01</span>
+          <div class="proceso__info">
+            <h3>Selección</h3>
+            <p>Las vetas y el peso</p>
+          </div>
         </div>
-        <div class="hero-gradient-overlay"></div>
-    </section>
+      </div>
 
-    <section class="principles-section" id="principios">
-        <div class="texture-overlay"></div>
-        <div class="container">
-            <p class="scroll-reveal-text">
-                Cada instrumento nace de un proceso artesanal donde <span class="highlight">materiales</span>, calibración y detalle definen un sonido imposible de replicar.
-            </p>
+      <div class="proceso__row proceso__row--right anim-slide-right">
+        <div class="proceso__step">
+          <span class="proceso__n">02</span>
+          <div class="proceso__info">
+            <h3>Talla</h3>
+            <p>Ergonomía perfecta</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section class="workshop-section" id="taller">
-        <div class="workshop-wrapper">
-            <h2 class="workshop-title">Un espacio para vos</h2>
-            <div class="workshop-image-container">
-                <img src="https://images.unsplash.com/photo-1610214436577-df088737edaa?auto=format&fit=crop&q=80&w=1400" alt="Taller de luthería de Trastes" class="parallax-img">
-            </div>
+      <div class="proceso__row anim-slide-left">
+        <div class="proceso__step">
+          <span class="proceso__n">03</span>
+          <div class="proceso__info">
+            <h3>Bobinado</h3>
+            <p>El alma electrónica</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section class="materials-section" id="custom">
-        <div class="marquee-container">
-            <div class="marquee-text">
-                maderas maderas maderas maderas maderas maderas maderas maderas&nbsp;
-            </div>
-            <div class="marquee-text" aria-hidden="true">
-                maderas maderas maderas maderas maderas maderas maderas maderas&nbsp;
-            </div>
-        </div>
+    </div>
+  </section>
 
-        <div class="materials-container">
-            <div class="materials-grid">
-                <div class="material-card active" data-wood="cedro" data-desc="El Cedro aporta una calidez profunda y resonancia mística inmediata. Es la elección ideal para quienes buscan sobretonos ricos, armónicos aterciopelados y una respuesta acústica rápida y orgánica al tacto.">
-                    <span class="mat-number">01</span>
-                    <div class="mat-image-box">
-                        <img src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&q=80&w=400" alt="Madera de Cedro">
-                    </div>
-                    <h3 class="mat-name">CEDRO</h3>
-                </div>
 
-                <div class="material-card" data-wood="picea" data-desc="La Picea es sinónimo de claridad absoluta y rango dinámico. Su rigidez natural permite agudos cristalinos y un sustain infinito, proyectando cada nota con precisión quirúrgica y una pureza tonal inigualable.">
-                    <span class="mat-number">02</span>
-                    <div class="mat-image-box">
-                        <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=400" alt="Madera de Picea">
-                    </div>
-                    <h3 class="mat-name">PICEA</h3>
-                </div>
+  <!-- ═══════════════════════════════════
+       §6 · FOOTER CTA
+  ════════════════════════════════════ -->
+  <footer class="footer-cta" id="contacto">
+    <div class="footer-cta__inner anim-fade-reveal">
+      <p class="footer-cta__quote">
+        Tu sonido no existe<br>en una línea de ensamblaje.<br>
+        <em>Crealo.</em>
+      </p>
+      <a href="#maderas" class="btn btn--light">Iniciar Custom Build</a>
+    </div>
+    <small class="footer-cta__copy">© 2025 Trastes Luthería · Buenos Aires</small>
+  </footer>
 
-                <div class="material-card" data-wood="caoba" data-desc="La Caoba ofrece un carácter robusto, con un ponche medio enfocado y terrenal. Evoca sonidos densos, tradicionales y maduros, equilibrando perfectamente las frecuencias para un sustain balanceado y con gran personalidad.">
-                    <span class="mat-number">03</span>
-                    <div class="mat-image-box">
-                        <img src="https://images.unsplash.com/photo-1604578762246-41134e37f9cc?auto=format&fit=crop&q=80&w=400" alt="Madera de Caoba">
-                    </div>
-                    <h3 class="mat-name">CAOBA</h3>
-                </div>
-
-                <div class="material-card" data-wood="palisandro" data-desc="El Palisandro destaca por su densidad premium y su veteado oscuro y dramático. Produce un espectro completo: bajos opulentos y agudos brillantes que se entrelazan de manera compleja, creando un sonido tridimensional e inolvidable.">
-                    <span class="mat-number">04</span>
-                    <div class="mat-image-box">
-                        <img src="https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?auto=format&fit=crop&q=80&w=400" alt="Madera de Palisandro">
-                    </div>
-                    <h3 class="mat-name">PALISANDRO</h3>
-                </div>
-            </div>
-
-            <div class="material-info-panel">
-                <div class="info-content-wrapper">
-                    <p id="wood-description" class="wood-description">
-                        El Cedro aporta una calidez profunda y resonancia mística inmediata. Es la elección ideal para quienes buscan sobretonos ricos, armónicos aterciopelados y una respuesta acústica rápida y orgánica al tacto.
-                    </p>
-                    <span class="wood-indicator">Explicación de la madera, por qué la elegirías, qué sonido evoca.</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="process-section" id="proceso">
-        <div class="container">
-            <div class="process-timeline">
-                <div class="process-step scroll-slide left">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Selección</h3>
-                        <p class="step-sub">Las vetas y el peso</p>
-                        <p class="step-text">Buscamos maderas con décadas de estacionamiento natural. Analizamos la densidad de la fibra y la dirección de los anillos de crecimiento para asegurar una base acústica perfecta e irrepetible.</p>
-                    </div>
-                </div>
-
-                <div class="process-step scroll-slide right">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Talla</h3>
-                        <p class="step-sub">Ergonomía perfecta</p>
-                        <p class="step-text">Cada mástil y cuerpo se esculpe enteramente a mano con gubias tradicionales. Adaptamos las dimensiones exactas a la fisonomía del músico, fusionando comodidad extrema y transferencia armónica.</p>
-                    </div>
-                </div>
-
-                <div class="process-step scroll-slide left">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Bobinado</h3>
-                        <p class="step-sub">El alma electrónica</p>
-                        <p class="step-text">Creamos las pastillas de forma artesanal, calibrando el número de vueltas y el tipo de imán alnico. El resultado es una electrónica orgánica que traduce la pureza de la madera sin alterar su timbre.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer-section">
-        <div class="footer-container">
-            <h2 class="footer-title">Tu sonido no existe en una línea de ensamblaje.<br><span class="highlight-footer">Créalo.</span></h2>
-            <a href="#custom" class="btn btn-solid btn-large">Iniciar Custom Build</a>
-            <div class="footer-credits">
-                <p>&copy; 2026 TRASTES. Hecho a mano, sin réplicas.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

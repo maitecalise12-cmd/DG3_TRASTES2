@@ -1,0 +1,609 @@
+/* ════════════════════════════════════════════════
+   TRASTES — css/styles.css
+   ────────────────────────────────────────────────
+   Paleta (del moodboard)
+   --cream      #F5EDD7   fondo principal
+   --caoba      #7A1C2E   acento primario / secciones
+   --caoba-dk   #5C1422   hover oscuro
+   --azul       #8FA8C0   títulos sobre caoba
+   --ebony      #0E0D0C   hero / proceso
+   --ebony-2    #191614   fondo proceso
+   ────────────────────────────────────────────────
+   Tipografía
+   --ff-serif   Cormorant Garamond  (≈ IvyOra Display)
+   --ff-sans    Inter               (≈ TT Commons Pro)
+════════════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Custom properties ───────────────────────── */
+:root {
+  --cream:     #F5EDD7;
+  --caoba:     #7A1C2E;
+  --caoba-dk:  #5C1422;
+  --azul:      #8FA8C0;
+  --ebony:     #0E0D0C;
+  --ebony-2:   #191614;
+
+  --ff-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --ff-sans:   'Inter', system-ui, -apple-system, sans-serif;
+
+  --sp-section: clamp(80px, 10vw, 140px);
+  --sp-side:    clamp(2rem, 7vw, 7rem);
+}
+
+/* ── Base ────────────────────────────────────── */
+html  { scroll-behavior: smooth; }
+body  { font-family: var(--ff-sans); background: var(--cream); color: var(--ebony); overflow-x: hidden; }
+img   { display: block; max-width: 100%; }
+a     { text-decoration: none; color: inherit; }
+
+/* ── Reduced motion ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+
+/* ════════════════════════════════════════════════
+   BOTONES
+════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.4rem;
+  border-radius: 99px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.22s ease;
+  white-space: nowrap;
+}
+
+.btn--solid {
+  background: var(--caoba);
+  color: var(--cream);
+  border-color: var(--caoba);
+}
+.btn--solid:hover  { background: var(--caoba-dk); border-color: var(--caoba-dk); transform: translateY(-2px); }
+
+.btn--outline {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgba(245,237,215,0.5);
+}
+.btn--outline:hover { border-color: var(--cream); transform: translateY(-2px); }
+
+.btn--light {
+  background: var(--cream);
+  color: var(--caoba);
+  border-color: var(--cream);
+}
+.btn--light:hover { background: transparent; color: var(--cream); border-color: rgba(245,237,215,0.55); }
+
+
+/* ════════════════════════════════════════════════
+   CLASES DE ANIMACIÓN (estado inicial)
+   JS agrega .is-visible para disparar la transición
+════════════════════════════════════════════════ */
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
+}
+.anim-fade-up.anim-delay { transition-delay: 0.3s; }
+
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-52px);
+  transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+}
+.anim-slide-right {
+  opacity: 0;
+  transform: translateX(52px);
+  transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+}
+.anim-fade-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+
+/* Estado visible — cualquier anim llega acá */
+.is-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+/* Palabras del reveal de principios (inyectadas por JS) */
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.word.in { opacity: 1; transform: translateY(0); }
+
+
+/* ════════════════════════════════════════════════
+   §1 · HERO
+════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ebony);
+}
+
+/* Foto guitarra + gradiente
+   → Reemplazá la URL con tu foto */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(105deg, var(--ebony) 28%, rgba(14,13,12,.6) 56%, transparent 75%),
+    url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1600&q=85')
+    center right / cover no-repeat;
+}
+
+/* Viñeta lateral derecha */
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 100% at 80% 50%, transparent 35%, rgba(14,13,12,.55) 100%);
+}
+
+/* ── Header / logo ── */
+.hero__header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 2.2rem var(--sp-side) 2rem;
+  border-bottom: 1px solid rgba(245,237,215,.16);
+}
+
+.logo {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  color: var(--cream);
+  letter-spacing: 0.12em;
+}
+
+/* ── Contenido: headline + CTAs ── */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--sp-side);
+  max-width: min(56%, 680px);
+}
+
+.hero__title {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.9rem, 5.4vw, 5.5rem);
+  line-height: 1.07;
+  color: var(--cream);
+  margin-bottom: 2.75rem;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+.hero__ctas .btn { min-width: 240px; }
+
+
+/* ════════════════════════════════════════════════
+   §2 · DECLARACIÓN DE PRINCIPIOS
+════════════════════════════════════════════════ */
+.principios {
+  position: relative;
+  background: var(--cream);
+  padding: var(--sp-section) 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+  overflow: hidden;
+}
+
+/* Anillos concéntricos de madera vía gradientes radiales apilados */
+.principios__rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 17.5%, rgba(168,140,90,.07) 18%, transparent 18.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 25.5%, rgba(168,140,90,.06) 26%, transparent 26.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 33.5%, rgba(168,140,90,.055) 34%, transparent 34.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 41.5%, rgba(168,140,90,.05) 42%, transparent 42.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 49.5%, rgba(168,140,90,.045) 50%, transparent 50.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 57.5%, rgba(168,140,90,.04) 58%, transparent 58.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 65.5%, rgba(168,140,90,.03) 66%, transparent 66.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 73.5%, rgba(168,140,90,.025) 74%, transparent 74.5%),
+    radial-gradient(ellipse 92% 88% at 32% 62%, transparent 81.5%, rgba(168,140,90,.02) 82%, transparent 82.5%);
+}
+
+.principios__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.principios__quote {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.9vw, 2.7rem);
+  line-height: 1.5;
+  color: var(--caoba);
+}
+.principios__quote strong {
+  font-weight: 700;
+}
+
+
+/* ════════════════════════════════════════════════
+   §3 · EL TALLER
+════════════════════════════════════════════════ */
+.taller {
+  background: var(--caoba);
+  padding: var(--sp-section) var(--sp-side) calc(var(--sp-section) * 1.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  min-height: 80vh;
+}
+
+/* Título enorme que se monta sobre la imagen */
+.taller__title {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(3.8rem, 9.5vw, 9rem);
+  line-height: 0.93;
+  color: var(--azul);
+  align-self: flex-start;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -3.5rem; /* se superpone a la imagen */
+  pointer-events: none;
+}
+
+.taller__frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 880px;
+  overflow: hidden;
+  box-shadow: 0 20px 72px rgba(0,0,0,.45);
+}
+
+.taller__img {
+  width: 100%;
+  height: clamp(280px, 44vw, 560px);
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.06) translateY(0px);
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+
+/* ════════════════════════════════════════════════
+   §4 · MADERAS
+════════════════════════════════════════════════ */
+.maderas {
+  background: var(--cream);
+  padding-bottom: var(--sp-section);
+  overflow: hidden;
+}
+
+/* ── Marquee ── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(122,28,46,.2);
+  padding-block: 0.6rem;
+}
+
+.marquee-track {
+  display: flex;
+  gap: clamp(2.5rem, 4vw, 4.5rem);
+  width: max-content;
+  animation: scroll-marquee 22s linear infinite;
+}
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-track span {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
+  color: var(--caoba);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  user-select: none;
+  white-space: nowrap;
+}
+
+@keyframes scroll-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Body ── */
+.maderas__body {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  padding: 2.5rem var(--sp-side) 0;
+}
+
+/* ── Cards ── */
+.maderas__cards {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.wood-card {
+  flex: 1;
+  min-width: 0;
+  cursor: default;
+  transition:
+    transform   0.45s cubic-bezier(.22,1,.36,1),
+    opacity     0.35s ease;
+}
+
+.wood-card.is-active  { transform: scale(1.04) translateY(-7px); }
+.wood-card.is-dimmed  { opacity: 0.32; }
+
+.wood-card__num {
+  display: block;
+  font-family: var(--ff-sans);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--caoba);
+  opacity: 0.65;
+  margin-bottom: 0.5rem;
+}
+
+.wood-card__img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.wood-card__name {
+  display: block;
+  font-family: var(--ff-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--caoba);
+  margin-top: 0.65rem;
+}
+
+/* ── Texturas CSS de madera
+   Para fotos reales: .wood-X { background-image: url('tu-foto.jpg'); background-size: cover; }
+─── */
+.wood-cedro {
+  background:
+    repeating-linear-gradient(87deg, transparent, transparent 2px, rgba(0,0,0,.045) 2px, rgba(0,0,0,.045) 3px),
+    repeating-linear-gradient(93deg, transparent, transparent 9px, rgba(255,255,255,.035) 9px, rgba(255,255,255,.035) 10px),
+    linear-gradient(170deg, #D4894A 0%, #C07030 22%, #D08848 50%, #A04C20 78%, #C27038 100%);
+}
+
+.wood-picea {
+  background:
+    repeating-linear-gradient(89deg, transparent, transparent 3px, rgba(0,0,0,.038) 3px, rgba(0,0,0,.038) 4px),
+    repeating-linear-gradient(91deg, transparent, transparent 11px, rgba(255,255,255,.05) 11px, rgba(255,255,255,.05) 12px),
+    linear-gradient(170deg, #ECD89A 0%, #D4BC78 28%, #EADA96 55%, #C8A860 82%, #D4BC78 100%);
+}
+
+.wood-caoba {
+  background:
+    repeating-linear-gradient(86deg, transparent, transparent 2px, rgba(0,0,0,.06) 2px, rgba(0,0,0,.06) 3px),
+    repeating-linear-gradient(94deg, transparent, transparent 7px, rgba(255,255,255,.028) 7px, rgba(255,255,255,.028) 8px),
+    linear-gradient(170deg, #8B3A20 0%, #6B2A18 26%, #7C3220 52%, #5C2010 78%, #8B3A20 100%);
+}
+
+.wood-palisandro {
+  background:
+    repeating-linear-gradient(88deg, transparent, transparent 2px, rgba(255,255,255,.035) 2px, rgba(255,255,255,.035) 3px),
+    repeating-linear-gradient(92deg, transparent, transparent 5px, rgba(0,0,0,.07) 5px, rgba(0,0,0,.07) 6px),
+    linear-gradient(170deg, #5A2038 0%, #3A1828 26%, #502235 52%, #2A1020 78%, #4A2034 100%);
+}
+
+/* ── Panel de info ── */
+.maderas__desc {
+  width: clamp(160px, 17vw, 220px);
+  flex-shrink: 0;
+  padding-top: 3.8rem;
+  align-self: center;
+}
+
+.maderas__desc p {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.92rem, 1.05vw, 1.08rem);
+  line-height: 1.72;
+  color: var(--caoba);
+  transition: opacity 0.28s ease;
+}
+
+
+/* ════════════════════════════════════════════════
+   §5 · EL PROCESO
+════════════════════════════════════════════════ */
+.proceso {
+  background: var(--ebony-2);
+  padding: var(--sp-section) var(--sp-side);
+  overflow: hidden;
+}
+
+.proceso__eyebrow {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  color: rgba(245,237,215,.38);
+  margin-bottom: 4rem;
+  letter-spacing: 0.01em;
+}
+
+.proceso__steps { display: flex; flex-direction: column; }
+
+.proceso__row {
+  border-top: 1px solid rgba(245,237,215,.1);
+  padding-block: 2rem;
+}
+.proceso__row:last-child { border-bottom: 1px solid rgba(245,237,215,.1); }
+
+/* Pasos pares → desplazados a la derecha (zigzag) */
+.proceso__row--right .proceso__step {
+  margin-left: auto;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.proceso__step {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  max-width: 520px;
+}
+
+.proceso__n {
+  font-family: var(--ff-serif);
+  font-weight: 300;
+  font-size: clamp(5rem, 12vw, 10rem);
+  color: rgba(245,237,215,.09);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.proceso__info h3 {
+  font-family: var(--ff-serif);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.2vw, 3.4rem);
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.proceso__info p {
+  font-family: var(--ff-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+
+/* ════════════════════════════════════════════════
+   §6 · FOOTER CTA
+════════════════════════════════════════════════ */
+.footer-cta {
+  background: var(--caoba);
+  padding: var(--sp-section) 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  min-height: 60vh;
+}
+
+.footer-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2.75rem;
+}
+
+.footer-cta__quote {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  line-height: 1.22;
+  color: var(--cream);
+}
+
+.footer-cta__copy {
+  font-family: var(--ff-sans);
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.13em;
+  color: rgba(245,237,215,.32);
+  text-align: center;
+}
+
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero__content {
+    max-width: 100%;
+  }
+  .hero__bg {
+    background:
+      linear-gradient(to bottom, rgba(14,13,12,.72) 0%, rgba(14,13,12,.45) 100%),
+      url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=900&q=80')
+      center / cover no-repeat;
+  }
+
+  .taller__title { margin-bottom: -2.2rem; }
+
+  .maderas__body { flex-direction: column; }
+  .maderas__desc { width: 100%; padding-top: 1.5rem; }
+
+  .proceso__row--right .proceso__step {
+    margin-left: 0;
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+@media (max-width: 540px) {
+  .maderas__cards { flex-wrap: wrap; }
+  .wood-card { flex: 1 1 calc(50% - 0.5rem); }
+
+  .hero__title { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+
+  .hero__ctas { align-items: stretch; }
+  .hero__ctas .btn { min-width: unset; text-align: center; }
+
+  .footer-cta { min-height: auto; }
+}
